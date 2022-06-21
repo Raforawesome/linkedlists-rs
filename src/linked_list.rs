@@ -47,6 +47,7 @@ where
     T: PartialEq + Clone,
 {
     head: Box<LinkedNode<T>>,
+	tail: Box<LinkedNode<T>>,
     size: usize,
 }
 
@@ -56,7 +57,8 @@ where
 {
     pub fn new(head: LinkedNode<T>) -> Self {
         Self {
-            head: Box::new(head),
+            head: Box::new(head.clone()),
+			tail: Box::new(head),
             size: 1_usize,
         }
     }
