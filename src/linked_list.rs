@@ -4,14 +4,14 @@ use std::borrow::Borrow;
 
 #[derive(Debug, Clone)]
 pub struct LinkedNode<T>
-where T: PartialEq
+where T: PartialEq, T: std::clone::Clone
 {
 	data: T,
 	next: Option<Box<LinkedNode<T>>>
 }
 
 impl<T> PartialEq for LinkedNode<T>
-where T: PartialEq
+where T: PartialEq, T: std::clone::Clone
 {
     fn eq(&self, other: &Self) -> bool {
         self.data == other.data
@@ -19,7 +19,7 @@ where T: PartialEq
 }
 
 impl<T> LinkedNode<T>
-where T: PartialEq
+where T: PartialEq, T: std::clone::Clone
 {
 	pub fn head(data: T) -> Self {
 		Self { data, next: None }
@@ -39,30 +39,37 @@ where T: PartialEq
 }
 
 
+#[derive(Debug, Clone)]
 pub struct LinkedList<T>
-where T: PartialEq
+where T: PartialEq, T: std::clone::Clone
 {
-	head: LinkedNode<T>,
+	head: Box<LinkedNode<T>>,
 	size: usize
 }
 
 impl<T> LinkedList<T>
-where T: PartialEq
+where T: PartialEq, T: std::clone::Clone
 {
 	pub fn new(head: LinkedNode<T>) -> Self {
-		Self { head, size: 1_usize }
+		Self { head: Box::new(head), size: 1_usize }
 	}
 
 	pub fn index(&self, val: T) -> Option<usize> {
 		let mut count: usize = 0;
-		let mut current: Box<&LinkedNode<T>> = Box::new(&self.head);
+		let mut current: Box<LinkedNode<T>> = self.head.clone();
 
 		loop {
-			let borrow: &LinkedNode<T> = *current.clone();
+			let borrow = *current.clone();
 			if *borrow.get() == val {
 				return Some(count)
 			}
-			current = 
+
+			let next: Option<Box<LinkedNode<T>>> = current.next;
+			if let Some(node) = next {
+				current = node;
+			} else {
+				return None
+			}
 			count += 1;
 		}
 		todo!()
