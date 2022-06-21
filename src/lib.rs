@@ -9,7 +9,6 @@ mod tests {
 
     #[test]
     fn it_works() {
-		let list: LinkedList<i32> = LinkedList::new(LinkedNode::head(2));
-		todo!()
+		let _list: LinkedList<i32> = LinkedList::new(LinkedNode::head(2));
     }
 }
