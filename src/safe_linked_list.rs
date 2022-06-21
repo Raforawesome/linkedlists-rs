@@ -63,7 +63,9 @@ where
         }
     }
 
-	pub fn fetch_tail() -> Box<LinkedNode<T>> {}
+	pub fn fetch_tail(&mut self) -> Box<LinkedNode<T>> {
+		todo!()
+	}
 
     pub fn index(&self, val: T) -> Option<usize> {
         let mut count: usize = 0;
@@ -87,6 +89,6 @@ where
 
 	pub fn append(&mut self, node: LinkedNode<T>) {
 		let boxed: Box<LinkedNode<T>> = Box::new(node);
-		let old_tail: Box<LinkedNode<T>> = self.tail;
+		let old_tail: Box<LinkedNode<T>> = self.tail.clone();
 	}
 }
