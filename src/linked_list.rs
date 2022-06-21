@@ -4,14 +4,14 @@ use std::borrow::Borrow;
 
 #[derive(Debug, Clone)]
 pub struct LinkedNode<T>
-where T: PartialEq + std::clone::Clone
+where T: PartialEq + Clone
 {
 	data: T,
 	next: Option<Box<LinkedNode<T>>>
 }
 
 impl<T> PartialEq for LinkedNode<T>
-where T: PartialEq + std::clone::Clone
+where T: PartialEq + Clone
 {
     fn eq(&self, other: &Self) -> bool {
         self.data == other.data
@@ -19,8 +19,8 @@ where T: PartialEq + std::clone::Clone
 }
 
 impl<T> LinkedNode<T>
-where T: PartialEq + std::clone::Clone
-{
+where T: PartialEq + Clone
+{	
 	pub fn head(data: T) -> Self {
 		Self { data, next: None }
 	}
@@ -41,14 +41,14 @@ where T: PartialEq + std::clone::Clone
 
 #[derive(Debug, Clone)]
 pub struct LinkedList<T>
-where T: PartialEq + std::clone::Clone
+where T: PartialEq + Clone
 {
 	head: Box<LinkedNode<T>>,
 	size: usize
 }
 
 impl<T> LinkedList<T>
-where T: PartialEq + std::clone::Clone
+where T: PartialEq + Clone
 {
 	pub fn new(head: LinkedNode<T>) -> Self {
 		Self { head: Box::new(head), size: 1_usize }
