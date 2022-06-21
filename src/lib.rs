@@ -1,7 +1,7 @@
-mod linked_list;
+mod safe_linked_list;
 mod alloc;
 
-pub use linked_list::{ LinkedList, LinkedNode };
+pub use safe_linked_list::{ LinkedList, LinkedNode };
 
 #[cfg(test)]
 mod tests {
