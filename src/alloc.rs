@@ -13,6 +13,10 @@ pub fn raw_dealloc<T>(ptr: *mut T) {
 	}
 }
 
+pub fn null_ptr<T>() -> *mut T {
+	std::ptr::null_mut() as *mut T
+}
+
 fn size_ofv<T>(_: T) -> Layout {
 	Layout::new::<T>()
 }
